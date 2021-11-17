@@ -1,10 +1,12 @@
-﻿using OpenQA.Selenium;
+﻿using MarsFramework.Global;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace MarsFramework.Pages
 {
     class SignIn
     {
+
         public SignIn()
         {
             PageFactory.InitElements(Global.GlobalDefinitions.driver, this);
@@ -31,7 +33,12 @@ namespace MarsFramework.Pages
 
         internal void LoginSteps()
         {
+            GlobalDefinitions.driver.Navigate().GoToUrl("http://localhost:5000");
 
+            SignIntab.Click();
+            Email.SendKeys("manalijain.16@gmail.com");
+            Password.SendKeys("Gown-Unexposed2-Aspirin");
+            LoginBtn.Click();
         }
     }
 }

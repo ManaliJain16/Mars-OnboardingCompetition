@@ -20,7 +20,7 @@ namespace MarsFramework.Global
         public static void wait(int time)
         {
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(time);
-
+            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(time);
         }
         public static IWebElement WaitForElement(IWebDriver driver, By by, int timeOutinSeconds)
         {

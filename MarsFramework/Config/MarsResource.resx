@@ -129,10 +129,10 @@
     <comment>If true Login, else Register</comment>
   </data>
   <data name="ReportPath" xml:space="preserve">
-    <value>your path</value>
+    <value>C:\Users\manal\OneDrive\Documents\Mars - Profile\Mars-OnboardingCompetition\MarsFramework\TestReports\MarsOnboarding.html</value>
   </data>
   <data name="ReportXMLPath" xml:space="preserve">
-    <value>your path</value>
+    <value>C:\Users\manal\OneDrive\Documents\Mars - Profile\Mars-OnboardingCompetition\MarsFramework\Config\XMLFile.xml</value>
   </data>
   <data name="ScreenShotPath" xml:space="preserve">
     <value>C:\Users\manal\OneDrive\Documents\Mars - Profile\Mars-OnboardingCompetition\MarsFramework\TestReports\Screenshots\</value>

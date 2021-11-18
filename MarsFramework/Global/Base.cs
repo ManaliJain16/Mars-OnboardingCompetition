@@ -6,6 +6,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using RelevantCodes.ExtentReports;
 using System;
+using System.IO;
 using static MarsFramework.Global.GlobalDefinitions;
 
 namespace MarsFramework.Global
@@ -22,14 +23,22 @@ namespace MarsFramework.Global
 
         #region reports
         public static ExtentTest test;
-        public static ExtentReports extent;
+        public static ExtentReports extentReport;
         #endregion
 
         #region setup and tear down
+        [OneTimeSetUp]
+        public void SetUp()
+        {
+            #region Initialise Reports
+            extentReport = new ExtentReports(ReportPath, true, DisplayOrder.OldestFirst);
+            extentReport.LoadConfig(MarsResource.ReportXMLPath);
+            #endregion
+        }
+
         [SetUp]
         public void Inititalize()
         {
-
             switch (Browser)
             {
 
@@ -43,16 +52,6 @@ namespace MarsFramework.Global
                     break;
 
             }
-
-            //GlobalDefinitions.driver = new ChromeDriver();
-            //driver.Manage().Window.Maximize();
-
-            #region Initialise Reports
-
-            extent = new ExtentReports(ReportPath, false, DisplayOrder.NewestFirst);
-            extent.LoadConfig(MarsResource.ReportXMLPath);
-
-            #endregion
 
             if (MarsResource.IsLogin == "true")
             {
@@ -72,13 +71,14 @@ namespace MarsFramework.Global
         public void TearDown()
         {
             // Screenshot
-            String img = SaveScreenShotClass.SaveScreenshot(GlobalDefinitions.driver, "Report");
-            //test.Log(LogStatus.Info, "Image example: " + img);
-            //// end test. (Reports)
-            //extent.EndTest(test);
-            //// calling Flush writes everything to the log file (Reports)
-            //extent.Flush();
-            //// Close the driver :)            
+            String imagePath = SaveScreenShotClass.SaveScreenshot(GlobalDefinitions.driver, "Report");
+            // test.Log(LogStatus.Info, "Image path: " + img);
+            test.Log(LogStatus.Info, test.AddScreenCapture(imagePath));
+            // end test. (Reports)
+            extentReport.EndTest(test);
+            // calling Flush writes everything to the log file (Reports)
+            extentReport.Flush();
+            // Close the driver :)            
             GlobalDefinitions.driver.Close();
             GlobalDefinitions.driver.Quit();
         }

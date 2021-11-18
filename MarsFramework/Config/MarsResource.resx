@@ -122,7 +122,7 @@
     <comment>1 for firefox and 2 for Chrome</comment>
   </data>
   <data name="ExcelPath" xml:space="preserve">
-    <value>your path</value>
+    <value>C:\Users\manal\OneDrive\Documents\Mars - Profile\Mars-OnboardingCompetition\MarsFramework\ExcelData\</value>
   </data>
   <data name="IsLogin" xml:space="preserve">
     <value>true</value>

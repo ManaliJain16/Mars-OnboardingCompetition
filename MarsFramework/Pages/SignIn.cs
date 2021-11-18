@@ -33,11 +33,11 @@ namespace MarsFramework.Pages
 
         internal void LoginSteps()
         {
-            GlobalDefinitions.driver.Navigate().GoToUrl("http://localhost:5000");
-
+            GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath + "TestDataShareSkill.xlsx", "SignIn");
+            GlobalDefinitions.driver.Navigate().GoToUrl(GlobalDefinitions.ExcelLib.ReadData(2, "Url"));
             SignIntab.Click();
-            Email.SendKeys("manalijain.16@gmail.com");
-            Password.SendKeys("Gown-Unexposed2-Aspirin");
+            Email.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Username"));
+            Password.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Password"));
             LoginBtn.Click();
         }
     }

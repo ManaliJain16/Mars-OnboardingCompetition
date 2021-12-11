@@ -14,7 +14,7 @@ namespace MarsFramework.Pages
         }
 
         //Click on Manage Listings Link
-        [FindsBy(How = How.LinkText, Using = "Manage Listings")]
+        [FindsBy(How = How.LinkText, Using = "Manage Listings")] 
         private IWebElement manageListingsLink { get; set; }
 
         //View the listing

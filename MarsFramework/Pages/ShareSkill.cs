@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
+using MarsFramework.Global;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
@@ -84,9 +85,9 @@ namespace MarsFramework.Pages
 
  
 
-        //Can we do FindElements...for all the Checkboxes for the Days       //Storing the starttime......//*[@id="service-listing-section"]/div[2]/div/form/div[7]/div[2]/div/div[2]/div[2]/input
-        [FindsBy(How = How.XPath, Using = "//div[3]/div[2]/input[1]")]
-        private IWebElement StartTime { get; set; }
+        ////Can we do FindElements...for all the Checkboxes for the Days       //Storing the starttime......//*[@id="service-listing-section"]/div[2]/div/form/div[7]/div[2]/div/div[2]/div[2]/input
+        //[FindsBy(How = How.XPath, Using = "//div[3]/div[2]/input[1]")]
+        //private IWebElement StartTime { get; set; }
 
         //Click on StartTime dropdown
         [FindsBy(How = How.XPath, Using = "//div[3]/div[2]/input[1]")]
@@ -128,98 +129,175 @@ namespace MarsFramework.Pages
 
         internal void EnterShareSkill()
         {
+            GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath + "TestDataShareSkill.xlsx", "ShareSkill");
             ShareSkillButton.Click();
-            Title.SendKeys("QA");
-            Description.SendKeys("MJ");
+            enterTitle();
+            enterDescription();
+            enterCategorySubCategory();
+            enterTags();
+            selectServiceType();
+            selectLocationType();
+            enterStartDateEndDate();
+            selectDays();
+            //StartTime.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Starttime"));
+            //EndTime.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Endtime"));
+            selectSkillTrade();
+            enterSkillExchange();
+            selectActiveOrHidden();
 
-            var categorySelect = new SelectElement(CategoryDropDown);
-            categorySelect.SelectByText("Digital Marketing");
-            
-            var subCategorySelect = new SelectElement(SubCategoryDropDown);
-            subCategorySelect.SelectByText("Video Marketing");
-
-            Tags.SendKeys("ab"+ Keys.Return);
-            Tags.SendKeys("cd" + Keys.Return);
-
-            // click on second service type option
-            ServiceTypeOptions[1].Click();
-
-            LocationTypeOptions[0].Click();
-            StartDateDropDown.Click();
-            EndDateDropDown.Click();
-            Days[0].Click();
-            Days[1].Click();
-            StartTime.Click();
-            StartTimeDropDown.Click();
-            EndTimeDropDown.Click();
-            SkillTradeOptions[0].Click();
-            SkillExchange.SendKeys("X" + Keys.Return);
-            ActiveOptions[0].Click();
+            // Save
             Save.Click();
         }
 
         internal void EditShareSkill()
         {
+            GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath + "TestDataManageListings.xlsx", "ManageListings");
+
+            // enter updated values
+            enterTitle();
+            enterDescription();
+            enterCategorySubCategory();
+            enterTags();
+            selectServiceType();
+            selectLocationType();
+            enterStartDateEndDate();
+            selectDays();
+            //StartTime.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Starttime"));
+            //EndTime.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Endtime"));
+            selectSkillTrade();
+            enterCredit();
+            selectActiveOrHidden();
+
+            Save.Click();
+        }
+
+        private void enterTitle()
+        {
             Title.Clear();
-            Title.SendKeys("Fuge1");
+            Title.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Title"));
+        }
 
+        private void enterDescription()
+        {
             Description.Clear();
-            Description.SendKeys("abc");
+            Description.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Description"));
+        }
 
-            var newcategorySelect = new SelectElement(CategoryDropDown);
-            newcategorySelect.SelectByText("Music & Audio");
+        private void enterCategorySubCategory()
+        {
+            var newCategorySelect = new SelectElement(CategoryDropDown);
+            newCategorySelect.SelectByText(GlobalDefinitions.ExcelLib.ReadData(2, "Category"));
 
-            var subCategorySelect = new SelectElement(SubCategoryDropDown);
-            subCategorySelect.SelectByText("Other");
+            var newSubCategorySelect = new SelectElement(SubCategoryDropDown);
+            newSubCategorySelect.SelectByText(GlobalDefinitions.ExcelLib.ReadData(2, "SubCategory"));
+        }
 
+        private void enterTags()
+        {
             //Tag remoe 
-            var TagToDelete = Global.GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[4]/div[2]/div/div/div/span[text()='ab']/a"));
-            TagToDelete.Click();
-            Tags.SendKeys("oo" + Keys.Return);
-
+            //var TagToDelete = Global.GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[4]/div[2]/div/div/div/span[text()='ab']/a"));
+            //TagToDelete.Click();
+            Tags.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Tags") + Keys.Return);
+        }
 
-
-            //Which radio button in service and location
-            // if first ooption is selected, click on second option and vice versa
-            //ServiceTypeOptions[1].Click();
-            if (ServiceTypeOptions[0].Selected)
-            {
-                ServiceTypeOptions[1].Click();
-            }
-            else
+        private void selectServiceType()
+        {
+            // service type
+            if ("Hourly basis service".Equals(GlobalDefinitions.ExcelLib.ReadData(2, "ServiceType")))
             {
                 ServiceTypeOptions[0].Click();
             }
-            Thread.Sleep(1000);
-
-
-            //ServiceTypeOptions.Click();
-            LocationTypeOptions[1].Click();
-
-            StartDateDropDown.SendKeys("20112021");
-
-            EndDateDropDown.SendKeys("24112021");
-
-
-            //Which days
-            // Unselect Sunday
-            if(Days[0].Selected)
+            else
             {
-                Days[0].Click();
+                ServiceTypeOptions[1].Click();
             }
-            // select Wednesday
-            if(!Days[4].Selected)
+        }
+
+        private void selectLocationType()
+        {
+            // Location Type
+            if ("On-site".Equals(GlobalDefinitions.ExcelLib.ReadData(2, "LocationType")))
             {
-                Days[4].Click();
+                LocationTypeOptions[0].Click();
             }
-             
-            SkillTradeOptions[1].Click();
-           //how Credit radio button  
-            CreditAmount.Clear();
-            CreditAmount.SendKeys("6");
+            else
+            {
+                LocationTypeOptions[1].Click();
+            }
+        }
 
+        private void enterStartDateEndDate()
+        {
+            StartDateDropDown.Clear();
+            StartDateDropDown.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Startdate"));
+            EndDateDropDown.Clear();
+            EndDateDropDown.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Enddate"));
+        }
 
-            Save.Click();
+        private void selectDays()
+        {
+            switch (GlobalDefinitions.ExcelLib.ReadData(2, "Selectday"))
+            {
+                case "Sun":
+                    Days[0].Click();
+                    break;
+                case "Mon":
+                    Days[1].Click();
+                    break;
+                case "Tue":
+                    Days[2].Click();
+                    break;
+                case "Wed":
+                    Days[3].Click();
+                    break;
+                case "Thu":
+                    Days[4].Click();
+                    break;
+                case "Fri":
+                    Days[5].Click();
+                    break;
+                case "Sat":
+                    Days[6].Click();
+                    break;
+            }
+        }
+
+        private void selectSkillTrade()
+        {
+            // Skill Trade
+            if ("Skill-Exchange".Equals(GlobalDefinitions.ExcelLib.ReadData(2, "SkillTrade")))
+            {
+                SkillTradeOptions[0].Click();
+            }
+            else
+            {
+                SkillTradeOptions[1].Click();
+            }
+        }
+
+        private void enterSkillExchange()
+        {
+            // Skill Exchange
+            SkillExchange.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Skill-Exchange") + Keys.Return);
+        }
+
+        private void enterCredit()
+        {
+            // Skill Exchange
+            CreditAmount.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Credit") + Keys.Return);
+        }
+
+        private void selectActiveOrHidden()
+        {
+            // Active or Hidden
+            if ("Active".Equals(GlobalDefinitions.ExcelLib.ReadData(2, "Active")))
+            {
+                ActiveOptions[0].Click();
+            }
+            else
+            {
+                ActiveOptions[1].Click();
+            }
         }
     }
 }

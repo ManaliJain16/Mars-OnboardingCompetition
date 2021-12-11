@@ -3,10 +3,10 @@ using NUnit.Framework;
 
 namespace MarsFramework
 {
-    public class Program
+    public class SkillsTest
     {
         [TestFixture]
-        [Category("Sprint1")]
+        [Category("Task2")]
         class User : Global.Base
         {
 
@@ -38,10 +38,6 @@ namespace MarsFramework
                 ManageListings manageListingObj = new ManageListings();
                 manageListingObj.Listings();
                 manageListingObj.DeleteListing();
-
-                // TODO: popup
-                  
-
             }
 
         }

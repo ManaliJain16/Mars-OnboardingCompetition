@@ -22,10 +22,11 @@ namespace MarsFramework
                 // Assert title and description for the newly created skill
                 ManageListings manageListingsObj = new ManageListings();
                 GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath + "TestDataShareSkill.xlsx", "ShareSkill");
-                var title = GlobalDefinitions.ExcelLib.ReadData(2, "Title");
-                var description = GlobalDefinitions.ExcelLib.ReadData(2, "Description");
+                var expectedTitle = GlobalDefinitions.ExcelLib.ReadData(2, "Title");
+                var expectedDescription = GlobalDefinitions.ExcelLib.ReadData(2, "Description");
 
-                manageListingsObj.verifyRowData(title, description);
+                Assert.AreEqual(expectedTitle, manageListingsObj.getRowTitle(), "title didn't match");
+                Assert.AreEqual(expectedDescription, manageListingsObj.getRowDescription(), "description didn't match");
             }
 
             [Test, Order(2)]
@@ -41,10 +42,11 @@ namespace MarsFramework
 
                 // Assert title and description for the updated skill
                 GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath + "TestDataManageListings.xlsx", "ManageListings");
-                var title = GlobalDefinitions.ExcelLib.ReadData(2, "Title");
-                var description = GlobalDefinitions.ExcelLib.ReadData(2, "Description");
+                var expectedTitle = GlobalDefinitions.ExcelLib.ReadData(2, "Title");
+                var expectedDescription = GlobalDefinitions.ExcelLib.ReadData(2, "Description");
 
-                manageListingObj.verifyRowData(title, description);
+                Assert.AreEqual(expectedTitle, manageListingObj.getRowTitle(), "title didn't match");
+                Assert.AreEqual(expectedDescription, manageListingObj.getRowDescription(), "description didn't match");
             }
 
             [Test, Order(3)]
@@ -59,7 +61,9 @@ namespace MarsFramework
                 GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath + "TestDataManageListings.xlsx", "ManageListings");
                 var title = GlobalDefinitions.ExcelLib.ReadData(2, "Title");
 
-                manageListingObj.verifyPopUpMessage(title + " has been deleted");
+                var expectedMessage = title + " has been deleted";
+
+                Assert.AreEqual(expectedMessage, manageListingObj.getPopUpText(), "popup text didn't match");
             }
 
         }

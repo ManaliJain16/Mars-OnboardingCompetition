@@ -2,7 +2,6 @@
 using System.Threading;
 using MarsFramework.Global;
 using MarsFramework.Utils;
-using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -65,17 +64,21 @@ namespace MarsFramework.Pages
             clickActionButtons[1].Click();
         }
 
-        public void verifyPopUpMessage(string message)
+        public string getPopUpText()
         {
             Wait.waitForElementToBeVisible(GlobalDefinitions.driver, LocatorType.XPath, "//*[@class='ns-box-inner']", 2);
-            Assert.AreEqual(message, PopUp.Text, "popup text didn't match");
+            return PopUp.Text;
         }
 
-        public void verifyRowData(string title, string description)
+        public string getRowTitle()
         {
             Wait.waitForElementExists(GlobalDefinitions.driver, LocatorType.XPath, "//table[@class='ui striped table']/tbody/tr[1]/td[3]", 2);
-            Assert.AreEqual(title, RowTitle.Text, "title didn't match");
-            Assert.AreEqual(description, RowDescription.Text, "description didn't match");
+            return RowTitle.Text;
+        }
+
+        public string getRowDescription()
+        {
+            return RowDescription.Text;
         }
     }
 }

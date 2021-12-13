@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using MarsFramework.Global;
+using MarsFramework.Utils;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -27,27 +29,27 @@ namespace MarsFramework.Pages
         private IWebElement edit { get; set; }
 
 
-        //Delete the listing...
-        // For delete this can be used as the XPath ---> (//i[@class='remove icon'])[1]
-        //tbody/div[contains(@class,'ui small icon buttons basic vertical')]/i[@class='remove icon']
-        //*[@id="listing-management-section"]/div[2]/div[1]/div[1]/table/tbody/tr[1]/td[8]/div/button[3]
+        //Delete the listing
         [FindsBy(How = How.XPath, Using = "(//i[@class='remove icon'])[1]")]
         private IWebElement delete { get; set; }
 
 
         //Click on Yes or No
-        //For No button ----> //*[@class='ui negative button']
-        //For Yes button ---> //*[@class='ui icon positive right labeled button']
         [FindsBy(How = How.XPath, Using = "//div[@class='actions']/button")]
         private IList<IWebElement> clickActionButtons { get; set; }
 
+        [FindsBy(How = How.XPath, Using = "//div[@class='ns-box-inner']")]
+        private IWebElement PopUp { get; set; }
+
+        [FindsBy(How =How.XPath, Using = "//table[@class='ui striped table']/tbody/tr[1]/td[3]")]
+        private IWebElement RowTitle { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//table[@class='ui striped table']/tbody/tr[1]/td[4]")]
+        private IWebElement RowDescription { get; set; }
+
         internal void Listings()
         {
-            //Populate the Excel Sheet
-            // GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "ManageListings");
-
             manageListingsLink.Click();
-            
         }
 
         internal void EditListing()
@@ -61,10 +63,19 @@ namespace MarsFramework.Pages
             Thread.Sleep(1000);
 
             clickActionButtons[1].Click();
+        }
 
-           //Managing Popup
-           // GlobalDefinitions.driver.SwitchTo().Alert().Accept();
+        public void verifyPopUpMessage(string message)
+        {
+            Wait.waitForElementToBeVisible(GlobalDefinitions.driver, LocatorType.XPath, "//*[@class='ns-box-inner']", 2);
+            Assert.AreEqual(message, PopUp.Text, "popup text didn't match");
+        }
 
+        public void verifyRowData(string title, string description)
+        {
+            Wait.waitForElementExists(GlobalDefinitions.driver, LocatorType.XPath, "//table[@class='ui striped table']/tbody/tr[1]/td[3]", 2);
+            Assert.AreEqual(title, RowTitle.Text, "title didn't match");
+            Assert.AreEqual(description, RowDescription.Text, "description didn't match");
         }
     }
 }

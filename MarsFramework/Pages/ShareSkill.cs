@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using MarsFramework.Global;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 
@@ -34,7 +33,7 @@ namespace MarsFramework.Pages
         [FindsBy(How = How.Name, Using = "subcategoryId")]
         private IWebElement SubCategoryDropDown { get; set; }
 
-        //TODO: Learn to create 
+        // Tags 
         [FindsBy(How = How.XPath, Using = "//body/div/div/div[@id='service-listing-section']/div[contains(@class,'ui container')]/div[contains(@class,'listing')]/form[contains(@class,'ui form')]/div[contains(@class,'tooltip-target ui grid')]/div[contains(@class,'twelve wide column')]/div[contains(@class,'')]/div[contains(@class,'ReactTags__tags')]/div[contains(@class,'ReactTags__selected')]/div[contains(@class,'ReactTags__tagInput')]/input[1]")]
         private IWebElement Tags { get; set; }
 

@@ -70,7 +70,7 @@ namespace MarsFramework.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\manal\OneDrive\Documents\Mars - Profile\Mars-OnboardingCompetition\MarsFramework\ExcelData\.
+        ///   Looks up a localized string similar to C:\Users\manal\OneDrive\Documents\github-repos\Mars-OnboardingCompetition\MarsFramework\ExcelData\.
         /// </summary>
         internal static string ExcelPath {
             get {
@@ -88,7 +88,7 @@ namespace MarsFramework.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\manal\OneDrive\Documents\Mars - Profile\Mars-OnboardingCompetition\MarsFramework\TestReports\MarsOnboarding.html.
+        ///   Looks up a localized string similar to C:\Users\manal\OneDrive\Documents\github-repos\Mars-OnboardingCompetition\MarsFramework\TestReports\MarsOnboarding.html.
         /// </summary>
         internal static string ReportPath {
             get {
@@ -97,7 +97,7 @@ namespace MarsFramework.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\manal\OneDrive\Documents\Mars - Profile\Mars-OnboardingCompetition\MarsFramework\Config\XMLFile.xml.
+        ///   Looks up a localized string similar to C:\Users\manal\OneDrive\Documents\github-repos\Mars-OnboardingCompetition\MarsFramework\Config\XMLFile.xml.
         /// </summary>
         internal static string ReportXMLPath {
             get {
@@ -106,7 +106,7 @@ namespace MarsFramework.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\manal\OneDrive\Documents\Mars - Profile\Mars-OnboardingCompetition\MarsFramework\TestReports\Screenshots\.
+        ///   Looks up a localized string similar to C:\Users\manal\OneDrive\Documents\github-repos\Mars-OnboardingCompetition\MarsFramework\TestReports\Screenshots\.
         /// </summary>
         internal static string ScreenShotPath {
             get {

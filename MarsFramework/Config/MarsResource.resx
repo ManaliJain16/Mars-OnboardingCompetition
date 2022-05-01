@@ -122,19 +122,19 @@
     <comment>1 for firefox and 2 for Chrome</comment>
   </data>
   <data name="ExcelPath" xml:space="preserve">
-    <value>C:\Users\manal\OneDrive\Documents\Mars - Profile\Mars-OnboardingCompetition\MarsFramework\ExcelData\</value>
+    <value>C:\Users\manal\OneDrive\Documents\github-repos\Mars-OnboardingCompetition\MarsFramework\ExcelData\</value>
   </data>
   <data name="IsLogin" xml:space="preserve">
     <value>true</value>
     <comment>If true Login, else Register</comment>
   </data>
   <data name="ReportPath" xml:space="preserve">
-    <value>C:\Users\manal\OneDrive\Documents\Mars - Profile\Mars-OnboardingCompetition\MarsFramework\TestReports\MarsOnboarding.html</value>
+    <value>C:\Users\manal\OneDrive\Documents\github-repos\Mars-OnboardingCompetition\MarsFramework\TestReports\MarsOnboarding.html</value>
   </data>
   <data name="ReportXMLPath" xml:space="preserve">
-    <value>C:\Users\manal\OneDrive\Documents\Mars - Profile\Mars-OnboardingCompetition\MarsFramework\Config\XMLFile.xml</value>
+    <value>C:\Users\manal\OneDrive\Documents\github-repos\Mars-OnboardingCompetition\MarsFramework\Config\XMLFile.xml</value>
   </data>
   <data name="ScreenShotPath" xml:space="preserve">
-    <value>C:\Users\manal\OneDrive\Documents\Mars - Profile\Mars-OnboardingCompetition\MarsFramework\TestReports\Screenshots\</value>
+    <value>C:\Users\manal\OneDrive\Documents\github-repos\Mars-OnboardingCompetition\MarsFramework\TestReports\Screenshots\</value>
   </data>
 </root>
